@@ -18,4 +18,7 @@ make
 ```bash
 objdump -D -b binary -m i8086 bios.bin
 objdump -D -b binary -m i8086 romlayout.o
+
+-M intel : 指定intel格式
+
 ```
