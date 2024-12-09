@@ -1,3 +1,15 @@
+- Pull crates to local workspace
+
+[https://github.com/Starry-OS/Starry](https://github.com/Starry-OS/Starry)
+
+```bash
+# To download the tool
+$ cargo install kbuild
+$ mkdir crates
+$ kbuild patch add axstarry
+$ kbuild patch remove axstarry
+$ kbuild patch list
+```
 
 - seabios 编译
 ```bash
@@ -42,4 +54,11 @@ objdump -D -b binary -m i8086 romlayout.o
 
 
 ```
+
+---
+
+参考文档:
+- [SeaBIOS实现简单分析](https://www.cnblogs.com/gnuemacs/p/14287120.html)
+- [浅度剖析 SeaBIOS 之 QEMU 初始化](https://zhuanlan.zhihu.com/p/678576761])
+- <<Qemu/kvm源码解析与应用>> - 李强
 
