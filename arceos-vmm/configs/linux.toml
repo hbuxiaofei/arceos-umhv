@@ -1,12 +1,26 @@
 id = 1
 name = "linux"
 vm_type = 2
-cpu_set = 2
-entry_point = 0x7c00
-bios_path = "vlbl.bin"
-bios_load_addr = 0x7c00
-kernel_path = "arceos-x86.bin"
-kernel_load_addr = 0x70200000
-ramdisk_path = "bzImage.bin"
-ramdisk_load_addr = 0x72000000
-disk_path = ""
+cpu_num = 1
+phys_cpu_sets = [1]
+entry_point = 0xf_e05b
+bios_path = "bios-256k.bin"
+bios_load_addr = 0xc_0000
+kernel_path = "arceos-x86_64.bin"
+kernel_load_addr = 0x100_0000
+# ramdisk_path = ""
+# ramdisk_load_addr = 0
+# disk_path = "disk.img"
+# Memory regions with format (`base_paddr`, `size`, `flags`).
+memory_regions = [
+    [0x0000_0000, 0x1_0000, 0x13],    # IO Port		64K	0b10011
+    [0x0001_0000, 0x400_0000, 0x7],   # Low RAM		64M	0b111
+    [0xfec0_0000, 0x1000, 0x17],      # IO APIC		4K	0b10111
+    [0xfee0_0000, 0x1000, 0x17],      # Local APIC	4K	0b10111
+    [0xfed0_0000, 0x1000, 0x17],      # HPET 		4K  0b10111
+]
+
+# Emu_devices
+# Name Base-Ipa Ipa_len Alloc-Irq Emu-Type EmuConfig
+emu_devices = [
+]
