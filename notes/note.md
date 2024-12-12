@@ -1,6 +1,6 @@
 - Pull crates to local workspace
 
-[https://github.com/Starry-OS/Starry](https://github.com/Starry-OS/Starry)
+    参考: [https://github.com/Starry-OS/Starry](https://github.com/Starry-OS/Starry)
 
 ```bash
 # To download the tool
@@ -90,20 +90,59 @@ Guest以Linux为例: cat /proc/ioports查看当前OS的所有的ioports :
 
 
 
-- TODO
-```
-1. 支持设置primary vcpu第一条指令地址 entry_point.
-   说明: 可能还需要考虑设置代码段 CS 寄存器
+**Todo List**
 
-2. 需要让seabios认为是在KVM环境下, 即 strcmp(signature, "KVMKVMKVM") == 0.
-   目前情况: Found hypervisor signature "RVMRVMRVMRVM" at 40000000
+- [x] 1. seabios第一条指令地址为: 0xf000:0xe05b, 支持设置primary vcpu第一条指令地址 entry_point.
 
-3. 支持通过fw_cfg, 通过 QEMU_CFG_FILE_DIR 读取 e820 信息.
+
+    ```
+    1. 目前实模式下还不支设置超过0xffff的地址
+    2. 考虑设置代码段 CS 寄存器
+    ```
+
+- [x] 2. 设置虚拟化需要截获的io端口
+
+    ```
+    有些端口需要进行截获, 否则会透传到宿主机, 获取宿主机的信息, 例如pci信息, 内存大小信息等
+    ```
+
+- [ ] 3. dma 实现支持
+
+    ```
+    很多数据的传输需要通过 dma 传输
+    ```
+
+
+- [ ] 4. 实现fw_cfg设备模拟
+
+
+    - [x] fw_cfg 实现 pio, 设备地址 [0x510, 0x511]
+    ```
+    告诉seabios, 虚拟化环境为 “QEMU”
+
+    ```
+
+    - [ ] fw_cfg 实现 dma, 设备地址 [0x514]
+    ```
+    用于传输数据, 例如内核data数据等
+    ```
+
+- [x] 5. 实现rtc设备模拟, 设备地址 [0x70, 0x71]
+
+
+    ```
+    在虚拟化环境中, seabios 通过 rtc 几个保留的寄存器获取内存大小信息
+    ```
+
+- [ ] 6. multiboot 实现
+
+    ```
+    seabios通过内核启动是通过multiboot协议启动的, 需要将内核文件进行重新封装
+    ```
+
 
 其他 ...
 
-
-```
 
 ---
 
